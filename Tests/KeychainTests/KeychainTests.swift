@@ -10,7 +10,7 @@ public enum KeychainKey {
     static let bService = "bService"
 }
 
-public enum KeychainManager {
+public enum Keychain {
     @KeychainItemWrapper(service: KeychainKey.aService, account: KeychainKey.aAccount)
     static public var a: String?
 
@@ -24,53 +24,53 @@ final class KeychainUsageTests: XCTestCase {
     let mockValueB = "mock-value-b"
     
     override func setUp() {
-        KeychainManager.a = nil
-        KeychainManager.b = nil
+        Keychain.a = nil
+        Keychain.b = nil
     }
 
     func testSingleKeychainItem() {
-        XCTAssertNil(KeychainManager.a)
+        XCTAssertNil(Keychain.a)
 
-        KeychainManager.a = mockValueA
+        Keychain.a = mockValueA
         
-        if let valueA = KeychainManager.a {
+        if let valueA = Keychain.a {
             XCTAssertEqual(valueA, mockValueA)
         }
     }
     
     func testMultipleKeychainItem() {
-        XCTAssertNil(KeychainManager.a)
-        XCTAssertNil(KeychainManager.b)
+        XCTAssertNil(Keychain.a)
+        XCTAssertNil(Keychain.b)
 
-        KeychainManager.a = mockValueA
-        KeychainManager.b = mockValueB
+        Keychain.a = mockValueA
+        Keychain.b = mockValueB
 
-        if let valueA = KeychainManager.a {
+        if let valueA = Keychain.a {
             XCTAssertEqual(valueA, mockValueA)
         }
 
-        if let valueB = KeychainManager.b {
+        if let valueB = Keychain.b {
             XCTAssertEqual(valueB, mockValueB)
         }
     }
 
     func testReassignment() {
-        XCTAssertNil(KeychainManager.a)
+        XCTAssertNil(Keychain.a)
 
-        KeychainManager.a = mockValueA
-        KeychainManager.a = mockValueB
+        Keychain.a = mockValueA
+        Keychain.a = mockValueB
 
-        if let valueA = KeychainManager.a {
+        if let valueA = Keychain.a {
             XCTAssertEqual(valueA, mockValueB)
         }
     }
     
     func testDeletion() {
-        XCTAssertNil(KeychainManager.a)
+        XCTAssertNil(Keychain.a)
 
-        KeychainManager.a = mockValueA
-        KeychainManager.a = nil
+        Keychain.a = mockValueA
+        Keychain.a = nil
 
-        XCTAssertNil(KeychainManager.a)
+        XCTAssertNil(Keychain.a)
     }
 }

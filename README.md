@@ -11,15 +11,15 @@ Sources:
 
 ```swift
 // Define your Keychain items
-public enum KeychainManager {
+public enum Keychain {
     @KeychainItemWrapper(service: "my-service", account: "my-account")
     static public var myKey: String?
 }
 
 // Get and set items
-KeychainManager.myKey = "my-value"
+Keychain.myKey = "my-value"
 
-print("Value is: \(KeychainManager.myKey)") // Value is: my-value
+print("Value is: \(Keychain.myKey)") // Value is: my-value
 ```
 
 ## Licenses
