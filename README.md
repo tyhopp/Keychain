@@ -27,7 +27,7 @@ The source code is adopted from these sources with a few small adjustments:
 - [`KeychainPasswordItem`](https://developer.apple.com/library/archive/samplecode/GenericKeychain/Listings/GenericKeychain_KeychainPasswordItem_swift.html) from Apple
 - [`KeychainItemWrapper`](https://github.com/Automattic/simplenote-ios/blob/3c404525449672d08e93380b4ef4a30054de1847/Simplenote/Classes/KeychainManager.swift) from Automattic
 
-The licenses are linked in the source files and copied without modification:
+The licenses are linked in the source files and available in the repo without modification:
 
 - [KeychainPasswordItem](./LICENSE-KeychainPasswordItem.md)
 - [KeychainItemWrapper](./LICENSE-KeychainItemWrapper.md)
