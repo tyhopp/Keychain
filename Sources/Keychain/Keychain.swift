@@ -2,6 +2,10 @@
     Adopted from Automattic's SimpleNote iOS project:
         https://github.com/Automattic/simplenote-ios/blob/3c404525449672d08e93380b4ef4a30054de1847/Simplenote/Classes/KeychainManager.swift
  
+    Edits made:
+        - Renamed `KeychainItemWrapper` to `Keychain`
+        - Gave `account` a default value of `default`
+    
     Original license:
         https://github.com/Automattic/simplenote-ios/blob/3c404525449672d08e93380b4ef4a30054de1847/LICENSE.md
  
@@ -12,11 +16,11 @@
 import Foundation
 
 @propertyWrapper
-public struct KeychainItemWrapper {
+public struct Keychain {
 
     let item: KeychainPasswordItem
 
-    init(service: String, account: String) {
+    init(service: String, account: String = "default") {
         item = KeychainPasswordItem(service: service, account: account)
     }
 
