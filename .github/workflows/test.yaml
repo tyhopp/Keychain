@@ -23,6 +23,9 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
+      - name: Select Xcode
+        run: sudo xcode-select -switch /Applications/Xcode_13.1.app && /usr/bin/xcodebuild -version
+
       - name: Install dependencies
         run: brew install xcbeautify
 
