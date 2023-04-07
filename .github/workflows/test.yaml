@@ -7,7 +7,17 @@ on:
 jobs:
   test:
     name: test
-    runs-on: macos-latest
+    strategy:
+      matrix:
+        os: [macos-12]
+        platform:
+          [
+            "macOS",
+            "iOS Simulator,OS=15.0",
+            "tvOS Simulator,OS=15.0",
+            "watchOS Simulator,OS=8.0",
+          ]
+    runs-on: ${{ matrix.os }}
 
     steps:
       - name: Checkout repo
@@ -16,8 +26,11 @@ jobs:
       - name: Install dependencies
         run: brew install xcbeautify
 
+      - name: Show destinations
+        run: xcodebuild test -scheme Keychain -showdestinations
+
       - name: Run tests
         run: >-
           set -o pipefail && xcodebuild test \
             -scheme Keychain \
-            -destination 'platform=macOS' | xcbeautify
+            -destination 'platform=${{ matrix.platform }}' | xcbeautify
