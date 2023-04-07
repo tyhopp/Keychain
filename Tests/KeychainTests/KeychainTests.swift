@@ -10,67 +10,83 @@ public enum KeychainKey {
     static let bService = "bService"
 }
 
-public enum Keychain {
-    @KeychainItemWrapper(service: KeychainKey.aService, account: KeychainKey.aAccount)
+public enum KeychainItem {
+    @Keychain(service: KeychainKey.aService, account: KeychainKey.aAccount)
     static public var a: String?
 
-    @KeychainItemWrapper(service: KeychainKey.bService, account: KeychainKey.bAccount)
+    @Keychain(service: KeychainKey.bService, account: KeychainKey.bAccount)
     static public var b: String?
 }
 
 // MARK: Tests
-final class KeychainUsageTests: XCTestCase {
+final class KeychainTests: XCTestCase {
     let mockValueA = "mock-value-a"
     let mockValueB = "mock-value-b"
     
     override func setUp() {
-        Keychain.a = nil
-        Keychain.b = nil
+        KeychainItem.a = nil
+        KeychainItem.b = nil
     }
 
     func testSingleKeychainItem() {
-        XCTAssertNil(Keychain.a)
+        XCTAssertNil(KeychainItem.a)
 
-        Keychain.a = mockValueA
+        KeychainItem.a = mockValueA
         
-        if let valueA = Keychain.a {
+        if let valueA = KeychainItem.a {
             XCTAssertEqual(valueA, mockValueA)
         }
     }
     
     func testMultipleKeychainItem() {
-        XCTAssertNil(Keychain.a)
-        XCTAssertNil(Keychain.b)
+        XCTAssertNil(KeychainItem.a)
+        XCTAssertNil(KeychainItem.b)
 
-        Keychain.a = mockValueA
-        Keychain.b = mockValueB
+        KeychainItem.a = mockValueA
+        KeychainItem.b = mockValueB
 
-        if let valueA = Keychain.a {
+        if let valueA = KeychainItem.a {
             XCTAssertEqual(valueA, mockValueA)
         }
 
-        if let valueB = Keychain.b {
+        if let valueB = KeychainItem.b {
             XCTAssertEqual(valueB, mockValueB)
         }
     }
 
     func testReassignment() {
-        XCTAssertNil(Keychain.a)
+        XCTAssertNil(KeychainItem.a)
 
-        Keychain.a = mockValueA
-        Keychain.a = mockValueB
+        KeychainItem.a = mockValueA
+        KeychainItem.a = mockValueB
 
-        if let valueA = Keychain.a {
+        if let valueA = KeychainItem.a {
             XCTAssertEqual(valueA, mockValueB)
         }
     }
     
     func testDeletion() {
-        XCTAssertNil(Keychain.a)
+        XCTAssertNil(KeychainItem.a)
 
-        Keychain.a = mockValueA
-        Keychain.a = nil
+        KeychainItem.a = mockValueA
+        KeychainItem.a = nil
 
-        XCTAssertNil(Keychain.a)
+        XCTAssertNil(KeychainItem.a)
+    }
+
+    func testNoAccount() {
+        @Keychain(service: "a") var a: String?
+
+        XCTAssertNil(a)
+
+        a = mockValueA
+
+        if let valueA = a {
+            XCTAssertEqual(valueA, mockValueA)
+        }
+
+        a = nil
+
+        XCTAssertNil(a)
     }
 }
