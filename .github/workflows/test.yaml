@@ -29,9 +29,6 @@ jobs:
       - name: Install dependencies
         run: brew install xcbeautify
 
-      - name: Show destinations
-        run: xcodebuild test -scheme Keychain -showdestinations
-
       - name: Run tests
         run: >-
           set -o pipefail && xcodebuild test \
