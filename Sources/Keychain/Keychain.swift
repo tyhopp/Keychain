@@ -20,7 +20,7 @@ public struct Keychain {
 
     let item: KeychainPasswordItem
 
-    init(service: String, account: String = "default") {
+    public init(service: String, account: String = "default") {
         item = KeychainPasswordItem(service: service, account: account)
     }
 
