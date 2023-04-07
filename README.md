@@ -20,6 +20,15 @@ if let token = token {
 token = nil
 ```
 
+## Platforms
+
+- macOS 12.0+
+- iOS 15.0+
+- tvOS 15.0+
+- watchOS 8.0+
+
+See the [CI config](./.github/workflows/test.yaml) for exact tests that are run for each PR.
+
 ## Licenses
 
 The source code is adopted from these sources with a few small adjustments:
