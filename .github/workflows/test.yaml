@@ -7,11 +7,24 @@ on:
 jobs:
   test:
     name: test
-    runs-on: macos-latest
+    strategy:
+      matrix:
+        os: [macos-12]
+        platform:
+          [
+            "macOS",
+            "iOS Simulator,OS=15.0,name=iPhone 13",
+            "tvOS Simulator,OS=15.0,name=Apple TV",
+            "watchOS Simulator,OS=8.0,name=Apple Watch Series 7 - 45mm",
+          ]
+    runs-on: ${{ matrix.os }}
 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
+
+      - name: Select Xcode
+        run: sudo xcode-select -switch /Applications/Xcode_13.1.app && /usr/bin/xcodebuild -version
 
       - name: Install dependencies
         run: brew install xcbeautify
@@ -20,4 +33,4 @@ jobs:
         run: >-
           set -o pipefail && xcodebuild test \
             -scheme Keychain \
-            -destination 'platform=macOS' | xcbeautify
+            -destination 'platform=${{ matrix.platform }}' | xcbeautify
