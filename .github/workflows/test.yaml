@@ -13,9 +13,9 @@ jobs:
         platform:
           [
             "macOS",
-            "iOS Simulator,OS=15.0",
-            "tvOS Simulator,OS=15.0",
-            "watchOS Simulator,OS=8.0",
+            "iOS Simulator,OS=15.0,name=iPhone 13",
+            "tvOS Simulator,OS=15.0,name=Apple TV",
+            "watchOS Simulator,OS=8.0,name=Apple Watch Series 7 - 45mm",
           ]
     runs-on: ${{ matrix.os }}
 
