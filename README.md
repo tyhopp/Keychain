@@ -15,6 +15,9 @@ token = "my-token"
 if let token = token {
     print(token) // my-token
 }
+
+// Delete
+token = nil
 ```
 
 ## Licenses
